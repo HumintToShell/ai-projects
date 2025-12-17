@@ -20,7 +20,7 @@ data sovereignty - no persistent cloud storage, only API calls exposed to extern
 
 ## Trade-offs
 - Requires directory navigation before starting Claude Code
-- Device-dependent access (mitigated via Nextcloud sync)
+- Device-dependent access (mitigated via Nextcloud sync or rsync+cronjob)
 - Manual backup/version control responsibility
 - No cross-device automatic synchronization
 
