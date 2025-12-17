@@ -37,9 +37,8 @@ effectively with filesystem-based context management.
 - **Enterprise adoption:** Blueprint for on-premises AI integration without complex user data management
 
 ## Technical Requirements
-- Claude Code CLI access
+- LLM CLI access
 - Local filesystem
-- Basic git/version control (optional)
 - Sync solution for multi-device access (optional)
 
 ## Pattern Applicability
