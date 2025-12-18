@@ -1,7 +1,7 @@
 markdown# Local Context Workflow for Claude Code
 
 ## Problem Statement
-Evaluate whether Claude can provide Project-level functionality while maintaining complete 
+Evaluate whether Claude, Gemini and Grok can provide Project-level functionality while maintaining complete 
 data sovereignty - no persistent cloud storage, only API calls exposed to external services.
 
 ## Methodology
