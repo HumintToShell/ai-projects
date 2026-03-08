@@ -7,20 +7,20 @@ accumulates in conversation history rather than persisting as searchable,
 organized documentation.
 
 ## Methodology
-- Described desired agent behavior in plain language to Claude Code's agent creator
-- Reviewed the generated baseline prompt for correctness and ambiguity
-- Made deliberate architectural edits before production deployment
-- Validated against real sessions across multiple domain types (homelab, travel, AI research)
-- Documented architectural decisions and their reasoning for future reference
+- I described the desired agent behavior in plain language to Claude Code's agent creator
+- I reviewed the generated baseline prompt for correctness and ambiguity
+- I made deliberate architectural edits before production deployment
+- I validated against real sessions across multiple domain types (homelab, travel, AI research)
+- I documented architectural decisions and their reasoning for future reference
 
 ## Results
 - Deployed working agent invoked via `/closer`, "log this session", or "wrap this up"
-- Agent dynamically scans filesystem to discover active domain directories
+- Agent dynamically scans the filesystem to discover active domain directories
   (identified by presence of CLAUDE.md) rather than relying on hardcoded paths
 - Generates structured markdown summaries: summary, key points, decisions,
   documents modified, follow-ups, links
-- Routes notes to correct domain directory based on session content classification
-- Always confirms with me before writing — no auto-save behavior
+- Routes notes to the correct domain directory based on session content classification
+- Always confirms with the user before writing — no auto-save behavior
 
 ## Trade-offs
 - Requires explicit invocation — no passive background logging
@@ -36,13 +36,13 @@ rejecting a dependency that added complexity without improving output quality.
 
 ## Architectural Decisions
 
-**Explicit tool formatting:** Generated prompt referenced tools conversationally.
-All tool names changed to backtick-formatted callables (`Glob`, `Write`, `Read`)
+**Explicit tool formatting:** The generated prompt referenced tools conversationally.
+I changed all tool names to backtick-formatted callables (`Glob`, `Write`, `Read`)
 to eliminate ambiguity between conceptual references and actual tool invocations.
 
 **Rejected domain skills dependency:** I evaluated giving the agent access to
 domain skills (homelab, travel, etc.) for richer classification context.
-Rejected — CLAUDE.md files in each domain directory already provide sufficient
+I rejected it — CLAUDE.md files in each domain directory already provide sufficient
 context. Simpler solution that meets the requirement wins over added complexity.
 
 ## Implications
