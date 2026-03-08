@@ -6,7 +6,12 @@ Documenting systematic evaluation of AI capabilities, deployment patterns, and o
 Federal IT specialist exploring AI operationalization with emphasis on data sovereignty, security boundaries, and enterprise deployment patterns.
 
 ## Projects
-- [Local Context Workflow for Claude Code](./claude-code-workflows/local-context-pattern.md) - Filesystem-based AI context management without cloud persistence
+
+### Agents
+- [Session Closer Agent](./agents/closer-agent.md) — Custom Claude Code agent for structured session documentation and domain-aware note routing
+
+### Workflows
+- [Local Context Workflow for Claude Code](./workflows/local-context-pattern.md) — Filesystem-based AI context management without cloud persistence
 
 ## Approach
 Each project documents:
