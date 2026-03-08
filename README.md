@@ -34,6 +34,7 @@ in constrained environments. That's what this portfolio documents.
 
 ### Workflows
 - [Local Context Workflow for Claude Code](./workflows/local-context-pattern.md) — Filesystem-based AI context management without cloud persistence
+- [LLM Platform Evaluation](./workflows/llm-evaluation.md) — Four-phase elimination process across six frontier LLM platforms; behavioral testing methodology and decision framework for selecting a primary AI assistant
 
 ### Frameworks
 - [ScriptForge](./frameworks/scriptforge.md) — Context-driven AI workflow for generating and optimizing PowerShell scripts to personal specifications and federal enclave standards; includes user documentation for others who want to clone and use the framework
