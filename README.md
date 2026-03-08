@@ -21,6 +21,9 @@ Federal IT specialist exploring AI operationalization with emphasis on data sove
 
 - **IEP Accommodation Generator** — Gemini Gem with Google Workspace integration that generates IEP-accommodated versions of algebra materials (chunked and enlarged formats) as native Google Docs; pending deployment while example template library is being built
 
+### Frameworks
+- [ScriptForge](./frameworks/scriptforge.md) — Context-driven AI workflow for generating and optimizing PowerShell scripts to personal specifications and federal enclave standards; includes user documentation for others who want to clone and use the framework
+
 ## Approach
 Each project documents:
 - Problem statement
