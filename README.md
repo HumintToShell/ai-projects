@@ -1,9 +1,27 @@
-# AI Projects & Experiments
+# AI Projects & Implementations
 
-Documenting systematic evaluation of AI capabilities, deployment patterns, and operational workflows. Focus on practical implementation, trade-off analysis, and real-world applicability.
+Practical AI operationalization built under real federal constraints —
+where data sovereignty isn't a preference, it's a requirement.
 
 ## Background
-Federal IT specialist exploring AI operationalization with emphasis on data sovereignty, security boundaries, and enterprise deployment patterns.
+
+Federal IT Specialist with 23+ years of operational experience across
+Army counterintelligence and federal law enforcement, now managing Windows
+infrastructure and support across a large distributed environment.
+
+Everything in this portfolio was built personally — homelab systems,
+personal workflows, and domain-specific tools — unless noted otherwise.
+The constraints that shape the work are real: air-gapped enclaves, zero
+inbound ports, and data policies that don't accommodate most AI tooling as-is.
+
+The closest thing to professional application here is ScriptForge — a
+framework that generates sanitized PowerShell scripts from sanitized
+examples. Environment-specific details like OUs and directory paths are
+placeholder values the sysadmin fills in before deployment. The AI never
+touches production data or systems.
+
+The federal AI adoption problem isn't capability — it's operationalization
+in constrained environments. That's what this portfolio documents.
 
 ## Projects
 
@@ -23,14 +41,6 @@ Federal IT specialist exploring AI operationalization with emphasis on data sove
 ## In Progress
 
 - **IEP Accommodation Generator** — Gemini Gem with Google Workspace integration that generates IEP-accommodated versions of algebra materials (chunked and enlarged formats) as native Google Docs; pending deployment while example template library is being built
-
-## Approach
-Each project documents:
-- Problem statement
-- Methodology
-- Results and findings
-- Trade-offs and limitations
-- Practical implications
 
 ---
 *Note: All examples sanitized for public sharing. No hostnames, network topology, or implementation-specific details included.*

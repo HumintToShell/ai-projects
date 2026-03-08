@@ -1,5 +1,7 @@
 # Local Context Workflow for Claude Code
 
+**Context:** Personal
+
 ## Problem Statement
 I set out to evaluate whether Claude, Gemini, and Grok could provide Project-level
 functionality while maintaining complete data sovereignty — no persistent cloud storage,

@@ -1,5 +1,7 @@
 # Homelab Expert Skill for Claude Code
 
+**Context:** Personal
+
 ## Problem Statement
 Homelab infrastructure decisions require consistent domain context across sessions:
 threat model, hard constraints, node inventory, remote access architecture, and a

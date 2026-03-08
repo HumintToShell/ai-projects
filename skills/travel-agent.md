@@ -1,5 +1,7 @@
 # Travel Agent Skill for Claude Code
 
+**Context:** Personal
+
 ## Problem Statement
 Managing Club Wyndham timeshare vacation planning across multiple booking networks
 (Wyndham, WorldMark, Margaritaville, RCI exchanges) required consistent domain context

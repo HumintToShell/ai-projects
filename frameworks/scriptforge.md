@@ -1,5 +1,7 @@
 # ScriptForge — AI-Assisted PowerShell Development Framework
 
+**Context:** Personal — framework designed around professional deployment constraints
+
 ## Problem Statement
 Writing consistent, field-ready PowerShell scripts for a distributed federal environment
 requires holding a large amount of context: enclave-specific constraints, site naming

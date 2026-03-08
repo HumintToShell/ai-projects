@@ -1,5 +1,7 @@
 # Session Closer Agent for Claude Code
 
+**Context:** Personal
+
 ## Problem Statement
 Claude Code sessions generate decisions, file changes, and follow-up items that
 are lost when the session ends. Without a structured close-out process, context
