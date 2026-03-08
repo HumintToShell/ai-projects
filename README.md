@@ -17,6 +17,10 @@ Federal IT specialist exploring AI operationalization with emphasis on data sove
 ### Workflows
 - [Local Context Workflow for Claude Code](./workflows/local-context-pattern.md) — Filesystem-based AI context management without cloud persistence
 
+## In Progress
+
+- **IEP Accommodation Generator** — Gemini Gem with Google Workspace integration that generates IEP-accommodated versions of algebra materials (chunked and enlarged formats) as native Google Docs; pending deployment while example template library is being built
+
 ## Approach
 Each project documents:
 - Problem statement
