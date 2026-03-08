@@ -11,6 +11,7 @@ Federal IT specialist exploring AI operationalization with emphasis on data sove
 - [Session Closer Agent](./agents/closer-agent.md) — Custom Claude Code agent for structured session documentation and domain-aware note routing
 
 ### Skills
+- [Homelab Expert Skill](./skills/homelab-expert.md) — Infrastructure advisory skill encoding a structured threat model, decision filter framework, and hard constraint doctrine; evolved from a subagent implementation to native skill architecture
 - [Travel Agent Skill](./skills/travel-agent.md) — Domain expert skill for timeshare vacation planning, ROI tracking, and itinerary building; evolved from a subagent implementation to native skill architecture
 
 ### Workflows
