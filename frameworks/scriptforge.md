@@ -20,18 +20,19 @@ wrote it — because the framework was built from how I write.
 
 ## Framework Components
 
-| File | Purpose |
-|------|---------|
-| `STANDARDS.md` | What to include, what to explicitly omit, and why — tuned to enclave reality |
-| `PROJECT_CONTEXT.md` | Environment context: air-gapped enclaves, USB deployment, junior operators, site naming conventions |
-| `PROMPTS.md` | Prompt templates for generation, enhancement, review, and documentation tasks |
-| `templates/` | Base script templates with best practices pre-built |
-| `examples/` | Enhanced real scripts demonstrating standards applied in practice |
+| File | Audience | Purpose |
+|------|----------|---------|
+| `STANDARDS.md` | Claude | What to include, what to explicitly omit, and why — tuned to enclave reality |
+| `PROJECT_CONTEXT.md` | Claude | Environment context: air-gapped enclaves, USB deployment, junior operators, site naming conventions |
+| `templates/` | Claude | Base script templates with best practices pre-built |
+| `examples/` | Claude | Enhanced real scripts demonstrating standards applied in practice |
+| `PROMPTS.md` | Human user | User manual for the framework — how to interact with Claude to get the most out of ScriptForge; intended for anyone who clones the repo and wants to use it |
 
 ## Methodology
 - I documented my existing script conventions and the constraints of my operational
   environment (STANDARDS.md, PROJECT_CONTEXT.md)
-- I built prompt templates for the common tasks: generate from requirement, optimize
+- I built PROMPTS.md as a user manual for anyone cloning the repo — guidance on
+  how to interact with Claude for common tasks: generate from requirement, optimize
   existing script, code review against standards, documentation
 - I validated the framework against real tasks — a script optimization pass on an
   existing script and a clean generation from a new requirement
