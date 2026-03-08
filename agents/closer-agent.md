@@ -20,7 +20,7 @@ organized documentation.
 - Generates structured markdown summaries: summary, key points, decisions,
   documents modified, follow-ups, links
 - Routes notes to correct domain directory based on session content classification
-- Always confirms with user before writing — no auto-save behavior
+- Always confirms with me before writing — no auto-save behavior
 
 ## Trade-offs
 - Requires explicit invocation — no passive background logging
@@ -40,7 +40,7 @@ rejecting a dependency that added complexity without improving output quality.
 All tool names changed to backtick-formatted callables (`Glob`, `Write`, `Read`)
 to eliminate ambiguity between conceptual references and actual tool invocations.
 
-**Rejected domain skills dependency:** Evaluated giving the agent access to
+**Rejected domain skills dependency:** I evaluated giving the agent access to
 domain skills (homelab, travel, etc.) for richer classification context.
 Rejected — CLAUDE.md files in each domain directory already provide sufficient
 context. Simpler solution that meets the requirement wins over added complexity.
