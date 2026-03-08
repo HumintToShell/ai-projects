@@ -10,6 +10,9 @@ Federal IT specialist exploring AI operationalization with emphasis on data sove
 ### Agents
 - [Session Closer Agent](./agents/closer-agent.md) — Custom Claude Code agent for structured session documentation and domain-aware note routing
 
+### Skills
+- [Travel Agent Skill](./skills/travel-agent.md) — Domain expert skill for timeshare vacation planning, ROI tracking, and itinerary building; evolved from a subagent implementation to native skill architecture
+
 ### Workflows
 - [Local Context Workflow for Claude Code](./workflows/local-context-pattern.md) — Filesystem-based AI context management without cloud persistence
 
