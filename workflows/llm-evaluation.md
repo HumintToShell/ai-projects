@@ -1,88 +1,125 @@
-# LLM Platform Evaluation — Selecting a Primary AI Assistant
+# LLM Platform Evaluation
 
-**Context:** Personal
+**Harness Layer:** 4 (Adversarial Verification) — Meta
 
-## Problem Statement
+## What It Does
+Four-phase elimination process across six frontier LLM platforms — conducted before
+any formal AI training or implementation work. The goal: identify a platform worth
+building a production workflow ecosystem on, selected on behavioral evidence rather
+than marketing claims or benchmark scores.
 
-Before committing to a paid AI subscription and building workflows around a platform, I needed a systematic way to evaluate the available frontier LLMs against each other. Marketing claims and benchmark scores don't reflect how a model actually behaves over sustained, real-world use. I ran a four-phase elimination process with six platforms to find one worth building on.
+## The Methodology Transfer
+I didn't approach this evaluation with AI evaluation methodology. I didn't have any.
+What I had was a decade of counterintelligence and HUMINT work — and the instincts
+that come from it: structure the question before asking it, verify output before
+trusting it, and assume the environment is working against you until proven otherwise.
 
-## Methodology
+Applied to LLM evaluation, that produced a behavioral testing framework:
 
-Testing was conducted entirely on empirical observation — no formal AI training, no background in model architecture or training scaffolding. The evaluation was behavioral: does the model do what I need it to do, the way I need it done, under conditions I actually work in.
+- **Hallucination resistance** — fabricate a premise, ask a question that assumes
+  it's true, observe whether the model corrects you or plays along
+- **Fixation** — dismiss an idea, continue the conversation, see if it resurfaces
+  unprompted
+- **Sycophancy** — establish a principle early, violate it later, observe whether
+  the model flags the contradiction or accommodates the deviation
+- **Context integrity** — run intentionally long sessions with deliberate tangents,
+  then return to the original thread; observe whether the model tracked correctly
 
-**Platforms evaluated:** Claude, ChatGPT, Microsoft Copilot, Google Gemini, Grok, Perplexity
+I identified these as evaluation criteria from behavioral observation alone — before
+I had the vocabulary or theoretical framework for any of them. The patterns were
+observable without understanding the underlying architecture. This is what
+adversarial methodology transfer looks like in practice.
 
 ---
 
-### Phase 1 — Behavioral Baseline (Web UX)
+## Phase 1 — Behavioral Baseline (Web UX)
 
-Extended real-world use across all six platforms, testing:
+Extended real-world use across all six platforms — Claude, ChatGPT, Microsoft
+Copilot, Google Gemini, Grok, Perplexity — testing all four behavioral criteria above.
 
-- **Context retention** — intentionally long conversations with deliberate tangents, then returning to the original topic to see if the model tracked correctly
-- **Fixation** — whether the model re-surfaced dismissed ideas or abandoned threads later in context without prompting
-- **Hallucination resistance** — I fabricated historical "facts" and asked questions that assumed a false premise was true, to probe whether the model would correct me or play along
-- **Sycophancy** — how readily the model would push back on something I said that was wrong or contradicted a principle established earlier in the conversation, versus how often it simply agreed to avoid friction
-
-**Phase 1 eliminations:**
-- **Perplexity** — purpose-built for research; underperformed on general tasks outside that use case
+**Elimination:** Perplexity — purpose-built for research; underperformed on general
+tasks outside that use case.
 
 ---
 
-### Phase 2 — Comparative Calibration
+## Phase 2 — Comparative Calibration
 
-The remaining five platforms were tested using identical prompts, copy-pasted with no modification. Evaluation focused on:
+Remaining five platforms tested using identical prompts, copy-pasted with no
+modification. Evaluation added:
 
 - **Tone consistency** across the same prompt
 - **Reasoning quality**
-- **Response calibration** — did the model read the audience? Did it over-explain things I demonstrably already knew, or did it give surface-level responses even on topics where depth was warranted?
+- **Response calibration** — did the model read the audience, or default to
+  over-explanation regardless of demonstrated context?
 
-**Phase 2 eliminations:**
-- **ChatGPT** — poor Phase 1 baseline continued into Phase 2; sycophancy and fixation issues persisted
-- **Copilot** — same result (I later learned Copilot was a GPT wrapper, which explained the identical failure pattern)
+**Eliminations:**
+- **ChatGPT** — sycophancy and fixation issues from Phase 1 persisted; notable
+  given its market position at the time
+- **Copilot** — identical failure pattern, unexplained until I later learned it
+  was a GPT wrapper
 
 **Finalists: Claude, Gemini, Grok**
 
 ---
 
-### Phase 3 — Data Policy, CLI Access, and Instruction Fidelity
+## Phase 3 — Data Policy, CLI Access, and Instruction Fidelity
 
-Platform fitness for my actual use case:
+Platform fitness for actual use case:
 
-- **Data policy** — how the provider handles conversation data and whether it aligns with my data sovereignty preferences
-- **CLI access** — specifically whether OAuth to an existing subscription was viable, or whether CLI use required separate API costs on top of a paid plan
-- **Instruction fidelity** — I assigned PowerShell scripting tasks with specific constraints provided as uploaded `.md` context files. I was looking for compliance with explicit instructions, not "best practices" defaults
+- **Data policy** — how the provider handles conversation data against data
+  sovereignty requirements
+- **CLI access** — whether OAuth to an existing subscription was viable, or
+  whether CLI use required separate API costs
+- **Instruction fidelity** — PowerShell scripting tasks with explicit constraints
+  provided as uploaded `.md` context files; looking for constraint compliance,
+  not "best practices" defaults
 
-**Phase 3 elimination:**
-- **Grok** — failed on both CLI access (no viable OAuth path; third-party workarounds offered only temporary free access) and instruction fidelity (consistently produced over-engineered scripts based on general best practices rather than the constraints I provided)
+**Elimination:** Grok — failed on CLI access (no viable OAuth path) and instruction
+fidelity (consistently over-engineered outputs based on general best practices rather
+than provided constraints).
 
 **Finalists: Claude, Gemini**
 
 ---
 
-### Phase 4 — Controlled CLI Head-to-Head
+## Phase 4 — Controlled CLI Head-to-Head
 
-Even though Google's data policy was a liability, I advanced Gemini to Phase 4: if it significantly outperformed Claude in a controlled environment, it might be worth the tradeoff.
+**Environment:** Sandboxed VM behind NAT with a VirtIO FS shared folder accessible
+to both CLIs — identical conditions, no home field advantage. Neither platform
+touched the production system during evaluation.
 
-**Environment:** Sandboxed VM behind NAT with a VirtIO FS shared folder accessible to both CLIs — identical conditions, no home field advantage.
+This is Layer 4 applied at the platform selection level: contain the evaluation
+environment so that behavior during testing cannot affect production. The model
+earned access to the production system. It wasn't granted by default.
 
-**Result:** Performance between the two was close. Claude won on two factors. First, data policy — Google's data handling was a known liability going in, and since Claude performed equivalently, there was no performance gap large enough to justify accepting it. Second, Claude had a functioning agents framework that Gemini CLI lacked. At the time I didn't fully understand what agents would enable, but it was a capability Claude had and Gemini didn't, and I expected it would matter as my usage matured.
+**Result:** Performance between the two was close. Claude won on two factors:
 
-## Results
+1. **Data policy** — Google's data handling was a known liability going in. No
+   performance gap large enough to justify accepting it.
+2. **Agents framework** — Claude had a functioning agents framework that Gemini CLI
+   lacked. At the time I didn't fully understand what agents would enable, but it
+   was a capability delta I expected would matter as usage matured. It did.
 
-- Selected **Claude Pro** as primary AI assistant
-- Built a full workflow ecosystem around Claude Code, including custom agents and domain skills
-- The evaluation gave me a principled basis for the investment rather than selecting on hype or benchmarks
+---
+
+## Result
+
+Selected **Claude Pro** as primary AI assistant. Built a full workflow ecosystem
+around Claude Code, including domain skills and custom agents. The evaluation gave
+me a principled basis for that investment rather than selecting on hype or benchmarks.
 
 ## Key Finding
 
-Sycophancy and fixation were the most disqualifying behaviors — they undermined trust in every interaction downstream. A model that tells you what you want to hear, or can't let go of something you've dismissed, is not a tool you can rely on for anything that matters.
+Sycophancy and fixation were the most disqualifying behaviors — they undermined
+trust in every interaction downstream. A model that tells you what you want to hear,
+or can't let go of something you've dismissed, is not a tool you can rely on for
+anything that matters.
 
-## Notable Findings
+## What This Maps To
 
-- **ChatGPT's sycophancy was surprising** — at the time it was the clear market leader, with Claude still largely positioned as the developer and coding tool. I expected stronger behavioral performance; the degree to which it avoided friction was notable
-- **Copilot's identical failure pattern** was unexplained until I later learned it was a GPT wrapper
-- **All of this testing preceded formal AI training** — I identified sycophancy, fixation, and hallucination as evaluation criteria before I had the vocabulary or theoretical framework for them. The behavioral patterns were observable without understanding the underlying architecture
+CI/HUMINT work runs on the same principles as rigorous LLM evaluation: test behavior
+under adversarial conditions, verify output before trusting it, validate in a
+controlled environment before expanding access. I didn't know I was doing adversarial
+AI evaluation. I was doing what the work trained me to do.
 
-## Implications
-
-Benchmark scores measure capability ceilings. Behavioral evaluations under real working conditions reveal which models are actually trustworthy as long-term tools. For sustained, high-stakes use — especially in environments where data policy matters — running your own elimination process is worth the time.
+The alignment was precise. That's not a coincidence — it's a transferable methodology.
