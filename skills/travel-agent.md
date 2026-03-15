@@ -1,96 +1,72 @@
-# Travel Agent Skill for Claude Code
+# Travel Agent Skill
 
-**Context:** Personal
+**Harness Layers:** 2 (Input Specification), 3 (Reasoning Constraints)
 
-## Problem Statement
-Managing Club Wyndham timeshare vacation planning across multiple booking networks
-(Wyndham, WorldMark, Margaritaville, RCI exchanges) required consistent domain context
-across sessions: ROI formulas, points economics, trip history, family preferences, and
-destination research approach. Rebuilding that context manually each session was
-inefficient and error-prone.
+## What It Does
+Production skill for managing a timeshare ownership — real booking decisions, real
+ROI calculations verifiable against market rates. The trips get booked from this.
 
-## Methodology
-- I built the initial solution as a domain expert subagent — an autonomous agent loaded
-  with travel context, planning logic, and ROI tracking methodology
-- I validated the subagent approach across real trip planning sessions (itinerary building,
-  ROI calculation, destination brainstorming)
-- I evaluated Anthropic's native skill system upon release and assessed fit against my
-  existing subagent implementation
-- I refactored from subagent to skill, restructuring the prompt accordingly
-- I maintained dual-mode operation: itinerary planning (destination locked) and
-  destination brainstorming (open exploration)
+## Design
 
-## Results
-- Deployed skill provides persistent domain context across all travel planning sessions
-- Dual-mode detection: the skill reads the user's opening message to determine whether
-  destination/dates are locked or the user is exploring options, and adapts workflow
-  accordingly
-- ROI tracking formula embedded: compares points cash equivalent to comparable
-  market rental (VRBO/Airbnb) for post-trip analysis
-- Trip history (2022-2026) and lessons learned maintained in REFERENCE.md,
-  loaded on skill invocation
-- Decision filters encode my travel philosophy into the skill's decision logic:
-  geographic clustering over rigid schedules, local food over national chains,
-  ROI-justified premiums
+**Dual-mode operation.** The skill operates in two distinct modes with different
+input specifications and reasoning constraints:
 
-## Trade-offs
-- Skill context is read-only during session — trip history updates require
-  manual edits to REFERENCE.md after each trip
-- No live booking integration — availability and reservation mechanics handled
-  separately by the user
-- Family composition treated as session variables (always asked, never assumed),
-  which adds a setup step each session but prevents stale assumptions
+- **Destination brainstorming** — open exploration against available inventory,
+  points balance, and travel calendar. Input spec: points available, travel window,
+  family composition, preferences. Output: ranked options with points cost and
+  estimated ROI against market rates.
+- **Itinerary building** — destination and dates locked, building a day-by-day
+  plan. Input spec: confirmed reservation details, family composition, interests,
+  logistics constraints. Output: structured itinerary with activity clustering,
+  local food prioritization, and contingency options.
+
+Mode is detected from the user's opening message — not selected from a menu. The
+skill reads whether destination and dates are locked and adapts accordingly.
+
+**ROI tracking embedded.** Every trip is evaluated against a comparable market
+rental — the skill searches for an actual comp: vacation rental (VRBO/Airbnb)
+matching property type, size, and location for the same dates. Not a hotel room,
+not an approximation. The formula is embedded in the skill, the comp search uses
+defined criteria, and the output is a verifiable number. This builds a multi-year
+dataset rather than one-off calculations. Outputs are defensible, not just plausible.
+
+**Decision filters encode travel philosophy.** Geographic clustering over rigid
+schedules. Local food over national chains. ROI-justified premiums. These aren't
+preferences stated at the start of each session — they're embedded in the skill's
+reasoning framework and applied before recommendations are made.
+
+## Harness Notes
+- **Layer 2 (Input Specification):** Each mode has a defined input spec. The skill
+  determines which spec applies before reasoning begins. Family composition is always
+  asked, never assumed — session variable, not persistent assumption.
+- **Layer 3 (Reasoning Constraints):** ROI formula, decision filters, and trip
+  history are encoded as reasoning constraints. The skill evaluates options against
+  documented criteria, not general travel advice.
+
+## On the Subagent→Skill Refactor
+This skill started as a domain expert subagent. When Anthropic released the native
+skill system, I refactored. Subagents carry overhead suited for autonomous,
+tool-using workflows — travel planning is interactive and user-directed. The refactor
+was straightforward because the harness didn't change. The governing documents,
+decision filters, and ROI methodology stayed identical. Only the scaffolding changed.
+That's the point.
 
 ## Key Finding
-Subagents are designed for autonomous task execution with tool use and multi-step
-reasoning. Skills are designed for domain expertise injection — loading context,
-terminology, and decision frameworks into the assistant's operating mode. The
-travel planning use case fit the skill pattern cleanly: no autonomous actions needed,
-just consistent context and structured reasoning applied to user-directed decisions.
+Dual-mode operation with separate input specifications produces materially different
+output quality than a single general-purpose travel assistant. The skill knows what
+it needs before it starts reasoning — and the mode determines what "done" looks like.
 
-Using the native skill system over a forced subagent implementation eliminated
-unnecessary complexity and aligned my tool choice with its intended design.
-
-## Architectural Decision
-
-**Subagent → Skill refactor:** My original subagent implementation worked, but
-subagents carry overhead suited for autonomous, tool-using workflows. Travel planning
-is fundamentally interactive — the user drives the decisions, the skill provides
-analysis and structure. When the skills system became available, refactoring was the
-right call: simpler invocation, lighter footprint, better alignment with how the
-feature is designed to work.
-
-This reflects a broader principle I apply: prefer native platform capabilities over
-custom implementations that approximate the same behavior. The platform will optimize
-its own primitives; fighting the grain adds maintenance burden for no functional gain.
-
-## Implications
-- **Federal/enterprise environments:** This domain skill pattern is directly applicable
-  to any recurring expert consultation use case — policy interpretation, compliance
-  checking, standards reference — where consistent context matters more than
-  autonomous action
-- **Skill vs. agent decision framework:** If the use case requires autonomous tool
-  execution and multi-step reasoning without user involvement, use an agent. If it
-  requires domain expertise applied to user-directed tasks, use a skill. Travel
-  planning is the latter.
-- **ROI documentation as discipline:** Embedding ROI tracking methodology into the
-  skill enforces consistent analysis across trips, building a multi-year dataset
-  rather than one-off calculations
-
-## Technical Requirements
-- Claude Code CLI with skills support
-- SKILL.md defining invocation triggers and core identity
-- REFERENCE.md for persistent domain data (trip history, ROI formulas, lessons learned)
-- Obsidian vault for finalized trip documents (user-directed writes only)
+## Trade-offs
+- Skill context is read-only during session — trip history updates require manual
+  edits to REFERENCE.md after each trip
+- No live booking integration — availability and reservation mechanics handled by
+  the user
+- Family composition treated as a session variable — adds a setup step but prevents
+  stale assumptions
 
 ## Pattern Applicability
-The domain expert skill pattern — core identity and decision logic in SKILL.md,
-persistent reference data in REFERENCE.md — is reusable for any domain with stable
-context that needs to persist across sessions. I apply the same structure to my
-homelab infrastructure and other recurring domains.
-
-## Next Steps
-- Update REFERENCE.md post-trip with New Orleans 2026 ROI data
-- Evaluate whether annual points tracking should be broken into a separate tracked
-  document or maintained inline
-- Consider a third mode for post-trip ROI documentation workflow
+The dual-mode input specification pattern applies to any domain where the same
+subject area requires fundamentally different reasoning depending on where the user
+is in the decision process. The mode determines the input spec. The input spec
+determines the reasoning constraints. The reasoning constraints determine what a
+defensible output looks like.
