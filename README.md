@@ -19,13 +19,13 @@ The harness is model-agnostic. It contains zero model-specific syntax. Written a
 
 The architecture operates across five layers:
 
-| Layer | Contract | Function |
-|-------|----------|----------|
+| Layer | Governs | Function |
+|-------|---------|----------|
 | 1 | Identity & Authority | What the agent is *permitted to occupy*, not what it can do |
 | 2 | Input Specification | Defines valid input before reasoning begins — HALT on ambiguity, do not infer |
 | 3 | Reasoning Constraints | Logic gates built by the SME over time; every conclusion cites a specific input |
-| 4 | Adversarial Verification | Separate judge whose only job is to break the worker's output |
-| 5 | Human-in-the-Loop Delivery | What the SME receives — confidence scores, audit trails, defined escalation triggers |
+| 4 | Adversarial Verification | Harden prompts, test behavior against failure modes, and contain deployment so errors don't reach production |
+| 5 | Human-in-the-Loop Delivery | What the SME receives — audit trails, defined escalation triggers, and explicit human decision points |
 
 The SME provides the load. AI provides the lift. The orchestrator provides the harness.
 
@@ -35,27 +35,27 @@ These are presented in the order they were built. Several predate the harness vo
 
 ### Frameworks
 
-**[ScriptForge](./frameworks/scriptforge.md)** — Context-driven AI workflow for generating and optimizing PowerShell scripts to federal enclave standards. A governing document as constraint harness (Layers 1, 3) — before I had the vocabulary for it. The AI never touches production data or systems; environment-specific details are placeholder values the sysadmin fills in before deployment. The closest thing to professional application in this portfolio.
+**[ScriptForge](./frameworks/scriptforge.md)** — A constraint framework for AI-assisted PowerShell development — built to my own enclave standards, portable to any LLM with repo access. The governing documents define what gets generated and what doesn't; the AI never touches production systems or data. Published on GitHub as a byproduct of the architecture, not the goal. Layers 1, 3.
 
 ### Workflows
 
-**[LLM Platform Evaluation](./workflows/llm-evaluation.md)** — Four-phase elimination process across six frontier LLM platforms. Identified sycophancy, fixation, and hallucination as evaluation criteria before having formal vocabulary for them. This is adversarial evaluation methodology — the precursor to Layer 4 thinking.
+**[LLM Platform Evaluation](./workflows/llm-evaluation.md)** — Four-phase elimination process across six frontier LLM platforms — conducted before any formal AI training or implementation work. I wasn't applying AI evaluation methodology; I was applying adversarial methodology from a decade of CI/HUMINT work. It happened to align precisely with how LLM capability should actually be evaluated. Identified sycophancy, fixation, and hallucination as criteria from behavioral observation alone, before having the vocabulary for them. Meta / Layer 4.
 
-**[Local Context Workflow for Claude Code](./workflows/local-context-pattern.md)** — Filesystem-based AI context management without cloud persistence. Touches all five layers in a thin implementation — model-agnostic architecture designed for environments where cloud tooling isn't an option.
+**[Local Context Workflow for Claude Code](./workflows/local-context-pattern.md)** — Filesystem-based AI context management without cloud persistence. Designed for environments where cloud tooling isn't an option — all five harness layers implemented through local files and folder structure alone. Layer 4 applied at the deployment level: the model running this workflow lived in a sandboxed VM for several weeks of adversarial testing before being trusted on the production system. Simple by necessity, portable by design. All Layers.
 
 ### Skills
 
-**[Homelab Expert Skill](./skills/homelab-expert.md)** — Infrastructure advisory skill encoding a structured threat model, decision filter framework, and hard constraint doctrine (Layers 1, 2). Scope boundary and authority contract in practice — the skill knows what it is not permitted to advise on.
+**[Homelab Expert Skill](./skills/homelab-expert.md)** — Advisory skill for a production 5-node homelab environment — built around a defined threat model and a decision matrix that documents the *why* behind key design choices, not just the what. Rather than hard out-of-scope boundaries, the skill is given enough context to reason at the edges of its domain. A discovered side effect: grounding an LLM in structured reasoning context with documented intent largely eliminates sycophancy within that domain — the skill will challenge decisions that deviate from established principles and require an explanation and mitigation before moving on. Authority defined through intent, not prohibited patterns. Layers 1, 2.
 
-**[Travel Agent Skill](./skills/travel-agent.md)** — Domain expert skill for timeshare vacation planning, ROI tracking, and itinerary building (Layers 2, 3). Input specification and reasoning constraints applied to a real domain workflow with verifiable outputs.
+**[Travel Agent Skill](./skills/travel-agent.md)** — Production skill for managing a timeshare ownership — real booking decisions, real ROI calculations verifiable against market rates. Operates in two distinct modes: destination brainstorming against available inventory and points constraints, or itinerary building once a trip is booked. Each mode has its own input specification and reasoning constraints. Outputs are defensible, not just plausible. The trips get booked from this. Layers 2, 3.
 
 ### Agents
 
-**[Session Closer Agent](./agents/closer-agent.md)** — Custom Claude Code agent for structured session documentation and domain-aware note routing (Layer 5). Human-in-the-loop delivery discipline — the agent proposes, the human approves, nothing writes to the vault without explicit authorization.
+**[Session Closer Agent](./agents/closer-agent.md)** — Production agent for structured session documentation — analyzes the conversation, generates notes split by domain, and routes each to the correct location. The agent proposes, the human approves, nothing writes anywhere without explicit authorization. Built around a hard rule: the Obsidian vault is the committed knowledge repository, not a scratch pad — the agent knows the difference and cannot cross that line without permission. Layer 5.
 
 ## In Progress
 
-**IEP Accommodation Generator** — Gemini Gem with Google Workspace integration that generates IEP-accommodated versions of algebra materials (chunked and enlarged formats) as native Google Docs. Built for a real SME — an 8th grade algebra teacher — who needs compliant accommodated materials without manually reformatting every assignment. This is the implementation chasm in miniature: the capability exists, the teacher's time doesn't. Pending deployment while the example template library is built.
+**IEP Accommodation Generator** — Gemini Gem with Google Workspace integration that generates IEP-accommodated algebra materials as native Google Docs — built for a real SME with a real compliance requirement who saves hours reformatting every assignment. Google Workspace and Google Classroom are the environment the SME is required to work in — Gemini was the right tool for that constraint, deployed in a sandboxed VM with controlled file access only. The SME gets a finished, compliant document. The AI never touches anything outside the file share. Pending deployment while the example template library is built. Layers 2, 5.
 
 ## Background
 
