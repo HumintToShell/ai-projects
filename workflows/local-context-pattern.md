@@ -1,57 +1,56 @@
 # Local Context Workflow for Claude Code
 
-**Context:** Personal
+**Harness Layers:** All (1–5)
 
-## Problem Statement
-I set out to evaluate whether Claude, Gemini, and Grok could provide Project-level
-functionality while maintaining complete data sovereignty — no persistent cloud storage,
-only API calls exposed to external services.
+## What It Does
+Filesystem-based AI context management without cloud persistence — all five harness
+layers implemented through local files and folder structure alone. Designed for
+environments where cloud tooling isn't an option, or where data sovereignty is a
+non-negotiable constraint.
 
-## Methodology
-- I created a local directory structure mirroring the web UI Project
-- I loaded existing documentation without pre-structure
-- I used the `/init` command to generate a CLAUDE.md context file
-- I tested across multiple sessions for context persistence
-- I compared effectiveness against the web UI Projects feature
+This is the workflow currently running in this portfolio's homelab environment.
 
-## Results
-- Achieved functional equivalence to cloud-based Projects
-- All context stored locally in human-readable CLAUDE.md
-- Zero server-side persistence beyond API request/response
-- Portable across systems via simple directory copy
-- Full audit trail via filesystem operations
+## Layer 4 Came First
+Before this workflow was trusted on the production system, the model running it had
+to earn that access.
 
-## Trade-offs
-- Requires directory navigation before starting Claude Code
-- Device-dependent access (mitigated via Nextcloud sync or rsync+cronjob)
-- Manual backup/version control responsibility
-- No cross-device automatic synchronization
+Phase 4 of the LLM platform evaluation ran Claude and Gemini head-to-head in a
+sandboxed VM behind NAT — identical conditions, no access to production systems or
+data. That evaluation was the adversarial verification step. Claude passed. The VM
+came down. The workflow moved to the production system.
+
+Layer 4 isn't a feature of this workflow — it's a precondition for it. The
+deployment discipline happened before the deployment.
+
+## How It Works
+- Local directory structure mirrors the context management a cloud Project provides
+- CLAUDE.md carries identity, operating philosophy, constraints, and domain context
+- All five harness layers implemented through file structure and documented policy:
+  - **Layer 1 (Identity & Authority):** Defined in CLAUDE.md — role, scope, what
+    the model is permitted to occupy
+  - **Layer 2 (Input Specification):** Context files define valid inputs and
+    operating parameters before reasoning begins
+  - **Layer 3 (Reasoning Constraints):** Decision frameworks, constraint doctrine,
+    and domain logic encoded as reference files loaded on invocation
+  - **Layer 4 (Adversarial Verification):** Completed in the sandboxed VM prior to
+    production deployment — not embedded in the workflow itself
+  - **Layer 5 (Human-in-the-Loop Delivery):** Nothing writes to committed storage
+    without explicit human approval; the human remains the decision point
 
 ## Key Finding
-Projects/persistent memory are primarily UI conveniences. Core AI capability operates
-effectively with filesystem-based context management.
+Projects and persistent cloud memory are primarily UI conveniences. Core AI
+capability operates effectively with filesystem-based context management. The
+harness doesn't require cloud infrastructure — it requires discipline in how
+local files are structured and maintained.
 
-## Implications
-- **Federal/IC environments (with self-hosted LLM):** Viable deployment pattern for
-  classified systems using local models — eliminates need for user profile databases
-  on the LLM server, keeping it stateless and reducing attack surface. All context
-  lives on user workstations at appropriate classification levels.
-- **Compliance-heavy industries:** Meets data residency requirements with full audit trail
-- **Individual users:** Complete control over AI interaction data
-- **Enterprise adoption:** Blueprint for on-premises AI integration without complex
-  user data management
-
-## Technical Requirements
-- LLM CLI access
-- Local filesystem
-- Sync solution for multi-device access (optional)
+## Trade-offs
+- Requires directory navigation before starting a session
+- Device-dependent without a sync solution (mitigated via Nextcloud)
+- Manual version control responsibility
+- No automatic cross-device synchronization
 
 ## Pattern Applicability
-I tested this workflow with Claude Code, but the pattern is deployment-agnostic — it
-works equally well with self-hosted models like LLaMA, Mistral, or government-approved
-LLMs in air-gapped environments.
-
-## Next Steps
-- Validate with security
-- Identify pilot use case
-- Document deployment pattern
+Tested with Claude Code, but deployment-agnostic. The same pattern works with
+self-hosted models in air-gapped or classification-constrained environments — the
+model is stateless, all context lives on the workstation, and the harness travels
+with the files. Simple by necessity, portable by design.
