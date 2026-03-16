@@ -57,7 +57,7 @@ These are presented in the order they were built. Several predate the harness vo
 
 ## In Progress
 
-**IEP Accommodation Generator** — Gemini Gem with Google Workspace integration that generates IEP-accommodated algebra materials as native Google Docs — built for a real SME with a real compliance requirement who saves hours reformatting every assignment. Google Workspace and Google Classroom are the environment the SME is required to work in — Gemini was the right tool for that constraint, deployed in a sandboxed VM with controlled file access only. The SME gets a finished, compliant document. The AI never touches anything outside the file share. Pending deployment while the example template library is built. Layers 2, 5.
+**IEP Accommodation Generator** — Gemini Gem with Google Workspace integration that generates IEP-accommodated algebra materials as native Google Docs — built for a real SME with a real compliance requirement who saves hours reformatting every assignment. Google Workspace and Google Classroom are the environment the SME is required to work in — Gemini was the correct tool selection, not a workaround. The prompt and governing documents were designed and tested in a Gemini sandbox; production will live in the school's enterprise system. The example folder is the input layer — structured examples teach the Gem the accommodation patterns; better examples produce better output. Pending deployment while the example library is built. Layers 2, 5.
 
 ## Patterns
 
