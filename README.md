@@ -59,11 +59,17 @@ These are presented in the order they were built. Several predate the harness vo
 
 **IEP Accommodation Generator** — Gemini Gem with Google Workspace integration that generates IEP-accommodated algebra materials as native Google Docs — built for a real SME with a real compliance requirement who saves hours reformatting every assignment. Google Workspace and Google Classroom are the environment the SME is required to work in — Gemini was the right tool for that constraint, deployed in a sandboxed VM with controlled file access only. The SME gets a finished, compliant document. The AI never touches anything outside the file share. Pending deployment while the example template library is built. Layers 2, 5.
 
-## Background
+## Patterns
 
-Federal IT Specialist (GS-12), Department of Justice. Windows systems administration across a distributed field office environment — approximately 800 users, one field office plus 15 offsites, including air-gapped enclave management. Active on the agency's AI advisory board. Previously: Army counterintelligence and HUMINT operations, federal law enforcement operations center.
+**Authority through intent, not prohibited patterns.** Giving a system the reasoning behind its constraints produces judgment. Giving it a list of rules produces compliance. These behave differently under pressure. → *Homelab Expert*
 
-Everything in this portfolio was built personally — homelab systems, personal workflows, and domain-specific tools — unless noted otherwise. The constraints that shape the work are real: air-gapped enclaves, zero inbound ports, and data policies that don't accommodate most AI tooling as-is.
+**Generate-then-refine.** AI output is a starting point, not a deliverable. The architectural decisions made after generation — what to keep, what to reject, what to restructure — are where the design actually happens. → *Session Closer, HelperBot*
+
+**Harness before scaffolding.** Build the governing documents first. The LLM is the last thing added, not the first. When the model changes, the harness doesn't. → *ScriptForge, Local Context Workflow*
+
+**Validate before expanding access.** No system earns production access by default. Behavioral testing in a controlled environment precedes deployment. → *LLM Evaluation, Local Context Workflow*
+
+**Input specification determines output quality.** Define what a valid input looks like before reasoning begins. Mode detection, constraint doctrine, and gap response handling are all input-layer decisions. → *Travel Agent, HelperBot*
 
 The federal AI adoption problem isn't capability — it's operationalization in constrained environments. That's what this portfolio documents.
 
