@@ -29,6 +29,8 @@ The architecture operates across five layers:
 
 The SME provides the load. AI provides the lift. The orchestrator provides the harness.
 
+A note on terminology: In current technical usage, 'harness' typically refers to the software layer that manages an AI agent while it's running — tool dispatch, memory, safety checks. This portfolio uses the term at a higher level. Here, the harness is the governing framework that defines what the system is permitted to do, what it must produce, and what constraints it operates within — before any technical implementation begins. Think of it this way: the technical community's harness manages how an agent runs. This portfolio's harness defines what the agent is allowed to be. The difference is the same as the difference between a rulebook and the values that produced it.
+
 ## Projects
 
 These are presented in the order they were built. Several predate the harness vocabulary — the instincts came first, the framework came from naming what was already happening. That progression is the point.
