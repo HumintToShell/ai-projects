@@ -61,6 +61,8 @@ These are presented in the order they were built. Several predate the harness vo
 
 ## Patterns
 
+**Requirement-first design.** Every system in this portfolio started with a defined operational requirement — not available tooling. Pain point identified, tasks decomposed, constraints documented, architecture modeled, then built. The harness gets designed before the scaffolding gets selected — because the requirement determines the tools, never the reverse. This instinct predates AI entirely — it's the same process applied to source collection planning, operations center playbooks, and enclave management for two decades. AI is the newest domain it's been applied to, not it's origin. → **All Project**
+
 **Authority through intent, not prohibited patterns.** Giving a system the reasoning behind its constraints produces judgment. Giving it a list of rules produces compliance. These behave differently under pressure. → *Homelab Expert*
 
 **Generate-then-refine.** AI output is a starting point, not a deliverable. The architectural decisions made after generation — what to keep, what to reject, what to restructure — are where the design actually happens. → *Session Closer, HelperBot*
