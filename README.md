@@ -45,6 +45,8 @@ These are presented in the order they were built. Several predate the harness vo
 
 **[Local Context Workflow for Claude Code](./workflows/local-context-pattern.md)** — Filesystem-based AI context management without cloud persistence. Designed for environments where cloud tooling isn't an option — all five harness layers implemented through local files and folder structure alone. Layer 4 applied at the deployment level: the model running this workflow lived in a sandboxed VM for several weeks of adversarial testing before being trusted on the production system. Simple by necessity, portable by design. All Layers.
 
+**[Agent Harness Architecture](./workflows/agent-harness-architecture.md)** — The local context workflow extended into a full agent framework — model-agnostic context layer, persistent cross-session memory, modular domain skills, and zero-inbound-port remote access — built from operational need between October and December 2025. When open-source agent harnesses went viral in early 2026, the architecture they popularized was already running in production here. Independent design validated by convergence, not inspired by it. All Layers.
+
 **[Tier 2 HelperBot](./workflows/tier2-helperbot.md)** — Proof of concept for a documentation-constrained IT support agent — built to demonstrate that deploying a knowledge base chatbot requires intentional design, not document dumping. Two prompt versions document the progression from functional design to hardened design, with an injection test battery developed alongside the hardening work. The gap between the two versions is the argument. Layers 1, 2, 3, 4. *POC — GenAI in pilot at the organization.*
 
 ### Skills
@@ -74,6 +76,8 @@ These are presented in the order they were built. Several predate the harness vo
 **Validate before expanding access.** No system earns production access by default. Behavioral testing in a controlled environment precedes deployment. → *LLM Evaluation, Local Context Workflow*
 
 **Input specification determines output quality.** Define what a valid input looks like before reasoning begins. Mode detection, constraint doctrine, and gap response handling are all input-layer decisions. → *Travel Agent, HelperBot*
+
+**Build from need, name later.** Every system in this portfolio started as a solution to a specific operational problem — the architectural vocabulary came from reflecting on what had already been built. The agent harness framework predates the open-source community's convergence on the same pattern by months. The local context workflow predates the formal harness vocabulary entirely. When the problem is real, the right architecture tends to emerge. → *Local Context Workflow, Agent Harness Architecture*
 
 The federal AI adoption problem isn't capability — it's operationalization in constrained environments. That's what this portfolio documents.
 
