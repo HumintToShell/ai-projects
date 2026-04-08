@@ -33,10 +33,10 @@ the framework travels with the repo.
 
 | File | Audience | Purpose |
 |------|----------|---------|
-| `STANDARDS.md` | Claude | What to include, what to explicitly omit, and why — tuned to enclave reality |
-| `PROJECT_CONTEXT.md` | Claude | Environment context: air-gapped enclaves, USB deployment, junior operators, site naming conventions |
-| `templates/` | Claude | Base script templates built to my specific conventions and structure |
-| `examples/` | Claude | Enhanced real scripts demonstrating standards applied in practice |
+| `STANDARDS.md` | LLM | What to include, what to explicitly omit, and why — tuned to enclave reality |
+| `PROJECT_CONTEXT.md` | LLM | Environment context: air-gapped enclaves, USB deployment, junior operators, site naming conventions |
+| `templates/` | LLM | Base script templates built to my specific conventions and structure |
+| `examples/` | LLM | Enhanced real scripts demonstrating standards applied in practice |
 | `PROMPTS.md` | Human user | User manual for the framework — how to interact with Claude to get the most out of ScriptForge; intended for anyone who clones the repo and wants to use it |
 
 ## Methodology
