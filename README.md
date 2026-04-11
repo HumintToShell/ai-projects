@@ -59,6 +59,10 @@ These are presented in the order they were built. Several predate the harness vo
 
 **[Session Closer Agent](./agents/closer-agent.md)** — Production agent for structured session documentation — analyzes the conversation, generates notes split by domain, and routes each to the correct location. The agent proposes, the human approves, nothing writes anywhere without explicit authorization. Built around a hard rule: the Obsidian vault is the committed knowledge repository, not a scratch pad — the agent knows the difference and cannot cross that line without permission. Layer 5.
 
+### Research
+
+**[Intent-Based Agent Governance](./research/intent-based-agent-governance.md)** — Position paper arguing that AI agents need commander's intent, not just rules. Maps the governance deficits documented in "Agents of Chaos" (Shapira et al., 2026) to the intent-based framework independently developed and deployed in the Agent Harness Architecture three months before the study was conducted. The paper names the gap between technical enforcement and operational governance, and proposes a dual-layer architecture combining architectural hard limits with documented reasoning: mission context, stakeholder models, priority hierarchies, and the rationale behind every constraint. The harness projects in this portfolio are the proof of concept.
+
 ## In Progress
 
 **[IEP Accommodation Generator](./agents/iep-accommodation-generator.md)** — Gemini Gem with Google Workspace integration that generates IEP-accommodated algebra materials as native Google Docs — built for a real SME with a real compliance requirement who saves hours reformatting every assignment. Google Workspace and Google Classroom are the environment the SME is required to work in — Gemini was the correct tool selection, not a workaround. The prompt and governing documents were designed and tested in a Gemini sandbox; production will live in the school's enterprise system. The example folder is the input layer — structured examples teach the Gem the accommodation patterns; better examples produce better output. Pending deployment while the example library is built. Layers 2, 5.
