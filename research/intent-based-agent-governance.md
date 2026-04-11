@@ -1,11 +1,8 @@
 # Intent-Based Agent Governance: Why AI Agents Need Commander's Intent, Not Just Rules
 
 **Author:** Christopher Baillie  
-**Affiliation:** U.S. Department of Justice  
 **Date:** April 2026  
 **Status:** Working Paper
-
-*The views expressed in this paper are solely those of the author and do not represent the official position of the U.S. Department of Justice.*
 
 ---
 
