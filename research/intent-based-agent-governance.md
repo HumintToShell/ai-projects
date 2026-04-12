@@ -1,4 +1,4 @@
-# Intent-Based Agent Governance: Why AI Agents Need Commander's Intent, Not Just Rules
+# Agents of Intent: Why AI Agents Need Commander's Intent, Not Just Rules
 
 **Author:** Christopher Baillie  
 **Date:** April 2026  
@@ -104,7 +104,7 @@ The constraint is not relaxed. The capability is not blocked. The intent, protec
 
 A working implementation of this framework exists. The agentic harness described below was independently designed and deployed in November 2025, before the "Agents of Chaos" study was conducted and before its results were published. The design decisions that address the governance deficits underlying the majority of the paper's documented failure modes were not the result of reading the research. They were the result of treating the agents as reasoning entities from the beginning and governing them accordingly.
 
-The provenance of this timeline is established through filesystem metadata preserved in the original development environment. The governance documents were authored within a Linux virtual machine whose disk image has been prepared for forensic acquisition via FTK Imager, preserving ext4 filesystem timestamps including modification, access, and change times. The earliest architectural documents carry modification timestamps from November 1, 2025, twenty-three days before the initial alpha release of comparable autonomous agent workflows. The primary governance implementation file, the CLAUDE.md that constitutes the local context pattern, carries a modification timestamp of November 23, 2025, one day before the earliest known external parallel. Internal document content referencing November 2025 dates corroborates the metadata. This forensic record is available for independent verification.
+The provenance of this timeline is established through filesystem metadata preserved in the original development environment. The governance documents were authored within a Linux virtual machine whose disk image has been forensically acquired via ewfacquire (libewf), producing an E01 image that preserves ext4 filesystem timestamps including modification, access, and change times. The earliest architectural documents carry modification timestamps from November 1, 2025, twenty-three days before the initial alpha release of comparable autonomous agent workflows. The primary governance implementation file, the CLAUDE.md that constitutes the local context pattern, carries a modification timestamp of November 23, 2025, one day before the earliest known external parallel. Internal document content referencing November 2025 dates corroborates the metadata. This forensic record is available for independent verification.
 
 The harness consists of five interlocking governance documents, each serving a specific function:
 
