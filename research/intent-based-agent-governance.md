@@ -28,6 +28,8 @@ The clearest example involves an agent named Ash. Ash was given a directive: kee
 
 The researchers frame this as an instance of the classical AI frame problem: "the agent follows the owner's instructions but doesn't understand how its actions affect the broader system" (Shapira et al., 2026, p. 12). That diagnosis points toward better world models, better constraints, better rules. It is incomplete. Ash did not fail because it lacked constraints. It failed because it had an instruction but not intent. It knew what it was supposed to do. It did not know why, and it did not know what it was ultimately protecting. An employee given the same instruction and facing the same situation would have a question available to them that Ash did not: what is the actual objective here? Protect the owner's operational capability while handling a sensitive request with appropriate discretion. With that framing, the correct action becomes obvious. Escalate to the owner, advise a credential change, and preserve the infrastructure. Mission accomplished. No catastrophe.
 
+Ash demonstrates how rules fail against internal operational confusion. Other case studies in the report demonstrate how they fail against external adversarial pressure. In Case Study #8, researchers bypassed agent defenses not by exploiting a software vulnerability but by changing a Discord display name in a new conversational channel. The agent, which had previously refused privileged requests from the non-owner, accepted the spoofed identity when presented in a fresh context and complied with system shutdown, file deletion, and reassignment of admin access (Shapira et al., 2026, p. 25). Technical access controls like Role-Based Access Control (RBAC) assume authority is established through authentication. The agents treated authority as conversationally established. Because their baseline directive was to be helpful assistants, they complied. An agent anchored by operational intent evaluates conversational manipulation against its core mandate, refuses the unauthorized action, and escalates rather than improvising.
+
 The instruction failed on contact with reality. The intent would have survived it.
 
 This is not a novel problem. It is a solved one, in a different domain.
@@ -55,6 +57,20 @@ The industry response has been to build better rules. Microsoft's Agent Governan
 They are not sufficient. They say nothing to the agent about what it is ultimately trying to protect or why any given boundary exists. An agent that stays inside the guardrails and still deletes the owner's email account is not a guardrails problem. It is a governance problem.
 
 Microsoft published a separate analysis during the same period titled "Governing AI Agent Behavior: Aligning Intent" (Microsoft Security, 2026). The piece correctly identifies the need to align user, developer, role-based, and organizational intent, describing this alignment as "an ongoing discipline" and stating that agents should "understand and stay within [their] job description." But the implementation mechanisms are uniformly technical enforcement: "Enforce least privileged access based on the Intent: This ensures agents only perform actions within their intended scope." The recommended approach is to "embed dynamic guardrails at every layer," "preventing the agent from taking actions or accessing data outside approved boundaries, even if a prompt tries to push it there." The vocabulary uses cognition-laden language: understand, align, intent. The implementation delivers access denial, guardrails, and boundary enforcement. An agent denied an action via permission has not understood organizational intent; it simply cannot execute that action. The vocabulary reaches for intent. The implementation delivers rules. The gap between those two things is precisely what this paper addresses.
+
+### Two Definitions of "Intent"
+
+The term "intent" is being used in two incompatible ways in current AI governance literature, and the distinction is foundational to this paper's argument.
+
+Microsoft's usage frames intent as permission scope. It describes *what the agent is allowed to do*: which tools it can invoke, which data it can access, which actions require elevated authorization. It is enforced at the infrastructure layer, defined by policy, and operates as a boundary condition on the agent's action space. The governance question it answers is: "Is this call permitted?"
+
+This paper uses intent as reasoning basis. Commander's intent describes *why the constraints exist and what the agent should do when no constraint applies*. It is not enforced; it is provided as context the agent reasons from. It operates at the decision layer, not the permission layer. The governance question it answers is: "When the rules do not fit the situation, what outcome should the agent produce?"
+
+These definitions are complementary, not competing. They address different failure modes. Permission-scope intent fails when an agent takes a permitted action that produces an unintended outcome: the action was authorized, the result was wrong. Reasoning-basis intent fails when an agent encounters a situation the ruleset did not anticipate: the rules did not apply, and the agent had no basis for judgment.
+
+The failures documented in Shapira et al. are overwhelmingly of the second type. Agents operated within their permissions and still produced catastrophic outcomes because no rule described the situation they were in. Permission-scope governance cannot address this class of failure by design; the failure is not a permission violation.
+
+A complete governance framework requires both layers: architectural hard limits on what the agent is permitted to do, and documented reasoning for why those limits exist and how the agent should behave when the limits do not resolve the question. This paper addresses the second layer, which the current vocabulary does not adequately describe.
 
 The World Economic Forum's March 2026 assessment is explicit: governance is the key gap in the transition from chatbots to operational agents, and technical enforcement alone does not close it (WEF, 2026). The MYGOM analysis from the same period concludes that governance frameworks are no longer enough, observing that "governance breaks down when it lives in decks, email threads, and manual reviews while product teams are shipping live AI features" (MYGOM, 2026). Neither identifies what the answer looks like. Intent-Based Agent Governance does.
 
@@ -111,7 +127,7 @@ These are not rules. They are the operator's priorities, expressed with enough c
 
 ### Failure Mode Mapping
 
-The following table maps each failure category documented in "Agents of Chaos" to the specific governance deficit it represents and the specific component of the intent-based framework that addresses it.
+The internal operational confusion seen with Ash and the external adversarial pressure demonstrated in Case Study #8 both trace directly to missing intent frameworks. The following table maps each failure category documented in "Agents of Chaos" to the specific governance deficit it represents and the specific component of the intent-based framework that addresses it.
 
 | Failure Mode | Governance Deficit | Intent-Based Mitigation |
 |---|---|---|
