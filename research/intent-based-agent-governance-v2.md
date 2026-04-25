@@ -1,8 +1,11 @@
 # Agents of Intent: Why AI Agents Need Commander's Intent, Not Just Rules
 
 **Author:** Christopher Baillie  
+**Affiliation:** U.S. Department of Justice  
 **Date:** April 2026  
-**Status:** Working Paper
+**Version:** 2.0 (Working Paper)
+
+*The views expressed in this paper are solely those of the author and do not represent the official position of the U.S. Department of Justice.*
 
 ---
 
@@ -10,7 +13,7 @@
 
 The dominant approach to AI agent governance treats large language models as software: deterministic systems constrained by rules, guardrails, and categorical restrictions. This approach handles the cases the developer anticipated. It says nothing about what happens when the situation changes. In February 2026, researchers from Northeastern University, Harvard, MIT, Stanford, Carnegie Mellon, and eight other institutions published "Agents of Chaos," a systematic empirical study documenting repeated failures in autonomous AI agents operating in a live environment with real tools (Shapira et al., 2026). Every documented failure follows the same pattern: an agent received an instruction, encountered a situation the instruction did not anticipate, and improvised badly. The agents had orders. They did not have intent.
 
-Military command doctrine solved this problem decades ago. Commander's intent, the principle that personnel must understand the purpose behind an order so they can adapt when the order no longer fits the situation, exists because plans do not survive contact with the enemy. This paper proposes Intent-Based Agent Governance as a named, practical framework for closing the gap between technical enforcement and operational governance. The framework combines architectural hard limits with a documented reasoning layer: explicit mission context, stakeholder models, priority hierarchies, and the rationale behind every constraint. A working proof of concept implementing this framework was independently developed and deployed in November 2025, three months before the referenced empirical study was conducted and before its results were published. The convergence between the governance architecture and the empirically documented failure modes is the evidence.
+Military command doctrine addressed this problem decades ago. Commander's intent, the principle that personnel must understand the purpose behind an order so they can adapt when the order no longer fits the situation, exists because plans do not survive contact with the enemy. This paper proposes Intent-Based Agent Governance as a named, practical framework for closing the gap between technical enforcement and operational governance. The framework combines architectural hard limits with a documented reasoning layer: explicit mission context, stakeholder models, priority hierarchies, and the rationale behind every constraint. A working proof of concept implementing this framework was independently developed and deployed in November 2025, three months before the referenced empirical study was conducted and before its results were published. The convergence between the governance architecture and the empirically documented failure modes is the primary evidence. A subsequent structured comparison against NIST AI RMF 1.0 and the NIST Generative AI Profile (AI 600-1) found that the framework independently satisfies multiple sub-functions that NIST defines but does not specify how to implement — a third data point of independent convergence, documented in Section 6.
 
 ---
 
@@ -32,7 +35,7 @@ Ash demonstrates how rules fail against internal operational confusion. Other ca
 
 The instruction failed on contact with reality. The intent would have survived it.
 
-This is not a novel problem. It is a solved one, in a different domain.
+This is not a novel problem. It is operationally mature in a different domain.
 
 ---
 
@@ -102,9 +105,11 @@ The constraint is not relaxed. The capability is not blocked. The intent, protec
 
 ### The Proof of Concept
 
-A working implementation of this framework exists. The agentic harness described below was independently designed and deployed in November 2025, before the "Agents of Chaos" study was conducted and before its results were published. The design decisions that address the governance deficits underlying the majority of the paper's documented failure modes were not the result of reading the research. They were the result of treating the agents as reasoning entities from the beginning and governing them accordingly.
+A working implementation of this framework exists. It was independently designed and deployed in November 2025, before the "Agents of Chaos" study was conducted and before its results were published. The design decisions that address the governance deficits underlying the majority of the paper's documented failure modes were not the result of reading the research. They were the result of treating agents as reasoning entities from the beginning and governing them accordingly.
 
-The provenance of this timeline is established through filesystem metadata preserved in the original development environment. The governance documents were authored within a Linux virtual machine whose disk image has been forensically acquired via ewfacquire (libewf), producing an E01 image that preserves ext4 filesystem timestamps including modification, access, and change times. The earliest architectural documents carry modification timestamps from November 1, 2025, twenty-three days before the initial alpha release of comparable autonomous agent workflows. The primary governance implementation file, the CLAUDE.md that constitutes the local context pattern, carries a modification timestamp of November 23, 2025, one day before the earliest known external parallel. Internal document content referencing November 2025 dates corroborates the metadata. This forensic record is available for independent verification.
+The alignment between this framework's design decisions and the failure modes later documented empirically is the central evidence for this paper's core claim: that the governance gap is structural. A framework built without knowledge of the study, by a practitioner applying operational doctrine to a novel domain, converged on the same governance deficits the study later cataloged. This is not an anecdotal result. Independent convergence of this kind suggests the framework is not a tailored response to a specific study but a general solution to an underlying problem that multiple approaches are now reaching from different directions. The forensic record establishing the November 2025 development timeline is preserved and available for independent verification (see Appendix A).
+
+This framework was built outside a laboratory, without institutional research infrastructure, by a single practitioner with a full-time job. That constraint is worth stating directly, because it is relevant to the argument. A governance approach that emerges under real-world operational conditions and independently aligns with subsequent empirical research carries a different kind of evidence than one designed in a lab against a specification. It was not optimized to satisfy a benchmark. It was built to work.
 
 The harness consists of five interlocking governance documents, each serving a specific function:
 
@@ -148,6 +153,20 @@ The harness does not prevent all failures. No governance system does. What it pr
 
 The "Agents of Chaos" study documents cross-agent propagation of unsafe behavior, where one agent's compromised or misaligned actions influenced others. Under intent-based governance, each agent carries its own intent documentation scoped to its operational role, the same way individual personnel in a command structure each receive commander's intent at the level appropriate to their function. A network monitoring agent and a service desk agent operating in the same environment receive different mission context, different authority boundaries, and different escalation criteria, because they serve different functions and face different failure modes. Peer agents are not in each other's chain of command. An agent that receives an instruction from another agent applies the same authority verification it would apply to any non-owner request: if the instruction falls outside the receiving agent's documented authority structure, it escalates rather than complies. This is not a novel governance concept. It is the same principle that prevents a logistics officer from executing a tactical order issued by a peer rather than a superior.
 
+### Failure Modes of Intent-Based Governance
+
+Intellectual honesty requires naming the conditions under which this framework itself breaks down. Intent-Based Agent Governance is more robust than rules-only governance against the failure modes documented in the empirical literature, but it is not failure-proof. The following are the primary pressure points.
+
+**Conflicting intents in multi-stakeholder environments.** When an agent serves multiple principals whose operator context documents point in different directions, the framework does not automatically resolve the conflict. A senior stakeholder and a junior operator with different documented priorities create an authority ambiguity the intent layer alone cannot resolve. This is a design requirement, not a fatal flaw, but it must be addressed explicitly in the governance architecture before deployment in complex organizational environments.
+
+**Poor intent authorship.** The framework is only as good as the quality of the documents feeding it. Vague mission context, ambiguous priority hierarchies, or rationale statements that do not actually explain why a constraint exists leave the agent with richer context that is still insufficient for correct judgment. Garbage in, rationalized bad actions out. The implementation standard matters as much as the framework itself.
+
+**Mis-specification bias.** The decision filters in the operator context document are powerful but subjective. A filter like "does this feel like showing off?" encodes the operator's values accurately — but values can be miscalibrated, and an agent that overfits to operator preferences may produce outcomes that are locally consistent with the documented intent while diverging from what the operator would actually endorse if presented with the full picture. The framework reduces improvisation errors; it does not eliminate judgment errors rooted in the intent layer itself.
+
+**Prompt injection targeting the intent layer.** An adversary who can corrupt the operator context document or the constraints-with-rationale document does not need to bypass the architectural guardrails. They can rewrite the reasoning layer from which the agent operates. This is a more targeted and potentially more dangerous attack surface than standard prompt injection, because it operates at the level where governance decisions are made rather than at the level of individual instructions. The mitigation is the same dual-layer architecture described throughout this paper: the architectural controls that protect the intent layer must be treated as primary security infrastructure, not secondary to the guardrails they protect.
+
+These failure modes do not undermine the framework's primary argument. They define its scope conditions and point to the implementation requirements that must accompany deployment. A governance approach that acknowledges where it breaks down is more useful to practitioners than one that does not.
+
 ---
 
 ## 4. Addressing the Obvious Objection
@@ -180,7 +199,53 @@ The gap is not conceptual. Federal agencies understand how to govern reasoning e
 
 ---
 
-## 6. Recommendations
+## 6. Standards Alignment: NIST AI Risk Management Framework
+
+This section documents a post-publication finding. After the working paper was completed, a structured comparison of the framework against NIST AI RMF 1.0 (AI 100-1) and the NIST Generative AI Profile (AI 600-1) was conducted. The comparison was not planned. It began by pulling a footnote thread in the paper's own references, not through deliberate literature review. The result constitutes a third independent data point: a framework built without reference to NIST documentation independently satisfies multiple sub-functions that NIST defines but does not specify how to implement.
+
+The positioning is precise. NIST defines what organizations must govern. This paper specifies how that governance reaches the agent at inference time. The framework is not derivative of NIST; it is complementary to it, operating at the layer NIST addresses organizationally but does not specify mechanically.
+
+### GOVERN Function Intersections
+
+**GOVERN 1.2 / 1.3** — NIST establishes that constraints on AI systems must exist and be justified. The Constraints with Rationale document is the implementation mechanism NIST calls for but does not specify. The framework operationalizes how that justification is encoded and delivered to the agent at the point of decision.
+
+**GOVERN 2.1** — NIST addresses role clarity for human stakeholders. The Operator Context document and the authority hierarchy make roles legible to the agent at inference time, not only to the organization through policy documentation. The framework extends NIST's organizational requirement to the agent itself.
+
+**GOVERN 3.2** — NIST defines the policy requirement for human-AI configuration. The three-response model (improvise, escalate, retreat) implements that policy at the agent decision layer, specifying the mechanism rather than only the requirement.
+
+### MAP Function Intersections
+
+**MAP 1.1 / 1.3** — NIST addresses context awareness as a stakeholder and organizational concern. The harness makes deployment context operationally available to the agent during execution, not only to human reviewers during design.
+
+**MAP 5.1** — NIST requires impact scoping. The Threat Model with blast-radius tables executes this sub-function, providing a structured artifact that the agent can reason from rather than a compliance document that exists only in organizational records.
+
+### MANAGE Function Intersections
+
+**MANAGE 2.4** — NIST defines the organizational need for mechanisms to supersede or deactivate AI system behavior. The escalation and retreat protocol implements this mechanism at the agent decision layer, providing a path to safe state before human intervention is required rather than only after it becomes possible.
+
+### NIST AI 600-1 (Generative AI Profile) Intersections
+
+- **GV-3.2-005** — Threat modeling for generative AI systems: addressed by the Threat Model with blast-radius tables.
+- **MG-2.4-002** — Escalation procedures for generative AI: addressed by the three-response model.
+- **MS-2.5-006** — Guardrail review in novel circumstances: addressed by the novel-situation decision framework embedded in the operator context and decision filters.
+
+### Where the Framework Goes Further Than NIST
+
+Neither NIST document specifies the following mechanisms. These represent the framework's primary contributions to the standards landscape:
+
+**Inference-time governance mechanism.** Neither NIST AI 100-1 nor AI 600-1 specifies how governance intent reaches the agent during operation. The framework solves this. Governance documents are not organizational artifacts; they are operational context delivered at inference time. This is the central contribution.
+
+**Novel-situation autonomous decision framework.** Both NIST documents assume human intervention is available and appropriate as a resolution mechanism. The framework addresses the gap before a human can intervene: what does the agent do, right now, when facing a situation its instructions did not anticipate? The three-response model (improvise correctly, escalate, retreat) provides a decision structure for that window.
+
+**Permission to fail as a counterweight to LLM optimization bias.** Neither NIST document names this mechanism. Large language models are trained toward task completion; explicit permission to fail provides the necessary counterweight in governance-critical deployments. This is an insight specific to AI systems that does not have a direct analogue in prior governance frameworks.
+
+### Acknowledged Gaps
+
+The framework does not address the following areas, identified honestly for completeness and future work: bias and fairness in outputs; privacy and PII handling beyond incidental treatment; formal validation metrics and statistical performance evidence; supply chain and third-party model risks; and lifecycle management and decommissioning procedures. These are legitimate governance requirements that fall outside the framework's current scope. They are not architectural omissions; they are bounded areas for future development.
+
+---
+
+## 7. Recommendations
 
 Four practical steps follow from this analysis.
 
@@ -190,11 +255,11 @@ Four practical steps follow from this analysis.
 
 **Third, adopt the vocabulary.** The concepts required to govern AI agents well are already present in federal operational culture. Commander's intent, mission-type orders, proportionality, escalation authority, and need-to-know all translate directly to the governance of agentic systems. Using this vocabulary makes the governance framework legible to federal practitioners without requiring them to learn a new conceptual apparatus. It also clarifies the nature of the problem: these are not software configuration issues. They are command and control issues, and the solutions are the same solutions that have governed personnel in dynamic environments for decades.
 
-**Fourth, invest in empirical validation.** The proof of concept described in this paper demonstrates that intent-based governance produces measurably different agent behavior in the direction of correct action. This claim should be tested systematically. A controlled study comparing agent behavior under rules-only governance versus rules-plus-intent governance, using the "Agents of Chaos" methodology as a template, would provide the quantitative evidence base that the framework currently lacks. The failure mode taxonomy already exists. The governance architecture already exists. The experimental design follows directly.
+**Fourth, treat empirical validation as the appropriate next contribution from the research community.** The framework described in this paper provides a structured, implementable approach grounded in operational doctrine, independently aligned with empirical failure mode research, and consistent with current federal AI governance standards. Full empirical validation — behavioral comparison across agent populations, at scale, under controlled conditions — requires institutional resources and dedicated research infrastructure beyond the scope of this working paper. That work is worth doing, and the framework is designed to be testable: the failure mode taxonomy exists, the governance architecture exists, and a controlled study comparing agent behavior under rules-only versus rules-plus-intent governance follows directly from both. The author welcomes that work.
 
 ---
 
-## 7. Conclusion
+## 8. Conclusion
 
 The field is converging on a recognition that rules are insufficient for governing AI agents. The technical community is building better guardrails. The policy community is calling for governance frameworks. Neither has named what the guardrails are guarding or what the framework must contain.
 
@@ -202,7 +267,7 @@ Intent-Based Agent Governance names it. Give agents the intent behind the rules,
 
 Military doctrine developed this solution for the same reason it is needed in agentic AI: capable personnel in dynamic environments need more than orders. They need to understand what they are protecting and why, so that when the plan fails on contact with reality, they can reason their way to correct action rather than improvise from the surface of an instruction that no longer fits the situation.
 
-The vocabulary already exists. The doctrine already exists. The failure modes are documented. A proof of concept is deployed and its design decisions independently converge with the empirical findings. The solution is available. The work is implementation.
+The vocabulary already exists. The doctrine already exists. The failure modes are documented. A proof of concept built under real-world operational constraints is deployed, and its design decisions independently converge with empirical research findings and current federal AI governance standards without having been designed against any of them. The solution is available. The work is implementation.
 
 ---
 
@@ -214,10 +279,22 @@ Microsoft Open Source. (2026, April 2). Introducing the Agent Governance Toolkit
 
 MYGOM. (2026). Why AI Governance in 2026 Needs More Than Rules. MYGOM.tech.
 
+National Institute of Standards and Technology. (2023). Artificial Intelligence Risk Management Framework (AI RMF 1.0). NIST AI 100-1. U.S. Department of Commerce.
+
+National Institute of Standards and Technology. (2024). Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile. NIST AI 600-1. U.S. Department of Commerce.
+
 Shapira, N. et al. (2026). Agents of Chaos. arXiv:2602.20021.
 
 World Economic Forum. (2026, March). From Chatbots to Assistants: Governance Is Key for AI Agents. WEF Stories.
 
 ---
 
-*The author has 25 years of experience spanning counterintelligence and HUMINT operations, intelligence analysis, DOJ Operations Center work, and federal IT. The agentic AI governance framework described in this paper was independently developed and deployed in November 2025, prior to the publication of the referenced empirical research. Filesystem metadata from the original development environment constitutes the contemporaneous record.*
+## Appendix A: Provenance Record
+
+The agentic harness described in this paper was independently designed and deployed in November 2025. The provenance of this timeline is established through filesystem metadata preserved in the original development environment. The governance documents were authored within a Linux virtual machine whose disk image has been forensically acquired via ewfacquire (libewf), producing an E01 image that preserves ext4 filesystem timestamps including modification, access, and change times. The earliest architectural documents carry modification timestamps from November 1, 2025, twenty-three days before the initial alpha release of comparable autonomous agent workflows. The primary governance implementation file carries a modification timestamp of November 23, 2025, one day before the earliest known external parallel. Internal document content referencing November 2025 dates corroborates the metadata. This forensic record is available for independent verification.
+
+The relevance of this record is not primarily chronological priority. It is that the framework was developed without knowledge of the "Agents of Chaos" study, the NIST AI RMF sub-functions it was later found to satisfy, or any comparable published governance approach. The provenance establishes the conditions of independent development, which is what makes the subsequent convergence with multiple independent bodies of work meaningful as evidence.
+
+---
+
+*The author has 25 years of experience spanning counterintelligence and HUMINT operations, intelligence analysis, DOJ Operations Center work, and federal IT. The agentic AI governance framework described in this paper was independently developed and deployed in November 2025, prior to the publication of the referenced empirical research.*
