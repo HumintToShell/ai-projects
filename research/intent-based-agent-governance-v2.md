@@ -12,7 +12,7 @@ header-includes:
 **Author:** Christopher Baillie  
 **Affiliation:** U.S. Department of Justice | [BaillieCH@outlook.com](mailto:BaillieCH@outlook.com)  
 **Date:** April 2026  
-**Version:** 2.0 (Working Paper)
+**Version:** 2.0 (Preprint)
 
 *The views expressed in this paper are solely those of the author and do not represent the official position of the U.S. Department of Justice.*
 
