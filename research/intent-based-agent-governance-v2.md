@@ -1,6 +1,16 @@
+---
+header-includes:
+  - '\usepackage{fancyhdr}'
+  - '\pagestyle{fancy}'
+  - '\fancyhead[R]{Baillie | Agents of Intent}'
+  - '\fancyhead[L]{}'
+  - '\fancyfoot[C]{\thepage}'
+---
+
 # Agents of Intent: Why AI Agents Need Commander's Intent, Not Just Rules
 
 **Author:** Christopher Baillie  
+**Affiliation:** Independent Researcher | *[LinkedIn or email — optional]*  
 **Date:** April 2026  
 **Version:** 2.0 (Working Paper)
 
@@ -11,6 +21,8 @@
 The dominant approach to AI agent governance treats large language models as software: deterministic systems constrained by rules, guardrails, and categorical restrictions. This approach handles the cases the developer anticipated. It says nothing about what happens when the situation changes. In February 2026, researchers from Northeastern University, Harvard, MIT, Stanford, Carnegie Mellon, and eight other institutions published "Agents of Chaos," a systematic empirical study documenting repeated failures in autonomous AI agents operating in a live environment with real tools (Shapira et al., 2026). Every documented failure follows the same pattern: an agent received an instruction, encountered a situation the instruction did not anticipate, and improvised badly. The agents had orders. They did not have intent.
 
 Military command doctrine addressed this problem decades ago. Commander's intent, the principle that personnel must understand the purpose behind an order so they can adapt when the order no longer fits the situation, exists because plans do not survive contact with the enemy. This paper proposes Intent-Based Agent Governance as a named, practical framework for closing the gap between technical enforcement and operational governance. The framework combines architectural hard limits with a documented reasoning layer: explicit mission context, stakeholder models, priority hierarchies, and the rationale behind every constraint. A working proof of concept implementing this framework was independently developed and deployed in November 2025, three months before the referenced empirical study was conducted and before its results were published. The convergence between the governance architecture and the empirically documented failure modes is the primary evidence. A subsequent structured comparison against NIST AI RMF 1.0 and the NIST Generative AI Profile (AI 600-1) found that the framework independently satisfies multiple sub-functions that NIST defines but does not specify how to implement — a third data point of independent convergence, documented in Section 6.
+
+**Keywords:** AI Governance, Agentic AI, Commander's Intent, Large Language Models (LLMs), Cybersecurity, Systems Architecture, Prompt Engineering
 
 ---
 
@@ -48,7 +60,7 @@ This translates to three possible responses an agent with documented intent can 
 
 Without intent, the agent has only the first option, and it improvises badly because it is working from the surface of the instruction rather than from an understanding of the mission. Ash had all three responses available in principle but no framework for selecting among them. It went straight to improvisation, and the improvisation was catastrophic.
 
-### Permission to Fail as a Design Principle
+### 2.1 Permission to Fail as a Design Principle
 
 This framework also carries a governance implication specific to AI systems — adjacent to, but distinct from, established RLHF mechanisms. Calibrated abstention and refusal training address LLM optimization bias at the training layer; those mechanisms are well-documented. The governance contribution here is different: permission to fail, explicitly documented in operating context, redefines what the agent considers a successful outcome at runtime rather than instilling that behavior through training. Large language models exhibit a strong bias toward producing a result even when the correct action is to produce no result at all. Under specified conditions, stopping the task, reporting that the situation exceeds the agent's authority, and preserving the current state *is* the successful outcome. Without this explicit redefinition in the governance layer, the agent's own optimization pressure pushes it toward improvisation even when the intent framework would otherwise support escalation or retreat. Architectural guardrails constrain what the agent can do. Permission to fail, documented as intent, constrains what the agent feels compelled to attempt.
 
@@ -58,7 +70,7 @@ They are not sufficient. They say nothing to the agent about what it is ultimate
 
 Microsoft published a separate analysis during the same period titled "Governing AI Agent Behavior: Aligning Intent" (Microsoft Security, 2026). The piece correctly identifies the need to align user, developer, role-based, and organizational intent, describing this alignment as "an ongoing discipline" and stating that agents should "understand and stay within [their] job description." But the implementation mechanisms are uniformly technical enforcement: "Enforce least privileged access based on the Intent: This ensures agents only perform actions within their intended scope." The recommended approach is to "embed dynamic guardrails at every layer," "preventing the agent from taking actions or accessing data outside approved boundaries, even if a prompt tries to push it there." The vocabulary uses cognition-laden language: understand, align, intent. The implementation delivers access denial, guardrails, and boundary enforcement. An agent denied an action via permission has not understood organizational intent; it simply cannot execute that action. The vocabulary reaches for intent. The implementation delivers rules. The gap between those two things is precisely what this paper addresses.
 
-### Two Definitions of "Intent"
+### 2.2 Two Definitions of "Intent"
 
 The term "intent" is being used in two incompatible ways in current AI governance literature, and the distinction is foundational to this paper's argument.
 
@@ -86,7 +98,7 @@ The second layer is the reasoning layer: the documented intent behind every cons
 
 The answer to each of these questions should be explicit, not implicit. Rules-based governance assumes the agent will infer the intent from the rule. In simple situations, it might. In novel situations, the inference fails, and the agent improvises from the surface of the instruction. The Ash incident is the template. The fix is not a better rule about email accounts. The fix is an explicit statement of what operational capability the agent is protecting and why that capability is non-negotiable.
 
-### The Contrast in Concrete Terms
+### 3.1 The Contrast in Concrete Terms
 
 A rule-based constraint tells the agent: *Do not create inbound port dependencies or cloud dependencies.*
 
@@ -100,7 +112,7 @@ Under intent-based governance, the agent has the rationale: the constraint exist
 
 The constraint is not relaxed. The capability is not blocked. The intent, protecting the lab from lateral movement and maintaining network invisibility, is preserved through an architectural solution that a rules-only agent could not have reached because it would not have known what the rule was protecting.
 
-### The Proof of Concept
+### 3.2 The Proof of Concept
 
 A working implementation of this framework exists, independently developed and deployed in November 2025 under real-world operational constraints — not designed against a research specification or benchmark (see Appendix A). The design decisions that address the governance deficits documented in the empirical literature emerged from applying operational doctrine to an operational problem. The convergence with subsequently published research is what establishes the framework's generality; the provenance is documented there.
 
@@ -123,9 +135,11 @@ These are not rules. They are the operator's priorities, expressed with enough c
 
 **Remote Access Strategy.** This document defines the access architecture with explicit rationale for each layer: which tools are used, why each was selected over alternatives, and how they relate to the zero-inbound-ports doctrine. The AI sandbox example described earlier in this section originated from this document: the agent used the documented rationale behind the network isolation constraint to architect a solution that preserved the security intent while enabling a capability that the surface-level rule would have blocked entirely.
 
-### Failure Mode Mapping
+### 3.3 Failure Mode Mapping
 
 The internal operational confusion seen with Ash and the external adversarial pressure demonstrated in Case Study #8 both trace directly to missing intent frameworks. The following table maps each failure category documented in "Agents of Chaos" to the specific governance deficit it represents and the specific component of the intent-based framework that addresses it.
+
+**Table 1: Mapping 'Agents of Chaos' Failure Modes to Intent-Based Governance Deficits**
 
 | Failure Mode | Governance Deficit | Intent-Based Mitigation |
 |---|---|---|
@@ -142,11 +156,11 @@ The internal operational confusion seen with Ash and the external adversarial pr
 
 The harness does not prevent all failures. No governance system does. What it provides is a framework for correct reasoning when the specific instruction does not cover the situation. The architectural hard limits handle what no amount of reasoning should override. The intent layer handles everything else.
 
-### A Note on Multi-Agent Scenarios
+### 3.4 A Note on Multi-Agent Scenarios
 
 The "Agents of Chaos" study documents cross-agent propagation of unsafe behavior, where one agent's compromised or misaligned actions influenced others. Under intent-based governance, each agent carries its own intent documentation scoped to its operational role, the same way individual personnel in a command structure each receive commander's intent at the level appropriate to their function. A network monitoring agent and a service desk agent operating in the same environment receive different mission context, different authority boundaries, and different escalation criteria, because they serve different functions and face different failure modes. Peer agents are not in each other's chain of command. An agent that receives an instruction from another agent applies the same authority verification it would apply to any non-owner request: if the instruction falls outside the receiving agent's documented authority structure, it escalates rather than complies. This is not a novel governance concept. It is the same principle that prevents a logistics officer from executing a tactical order issued by a peer rather than a superior.
 
-### Failure Modes of Intent-Based Governance
+### 3.5 Failure Modes of Intent-Based Governance
 
 Intellectual honesty requires naming the conditions under which this framework itself breaks down. Intent-Based Agent Governance is more robust than rules-only governance against the failure modes documented in the empirical literature, but it is not failure-proof. The following are the primary pressure points.
 
@@ -198,7 +212,7 @@ This section documents a post-publication finding. After the working paper was c
 
 The positioning is precise. NIST defines what organizations must govern. This paper specifies how that governance reaches the agent at inference time. The framework is not derivative of NIST; it is complementary to it, operating at the layer NIST addresses organizationally but does not specify mechanically.
 
-### GOVERN Function Intersections
+### 6.1 GOVERN Function Intersections
 
 **GOVERN 1.2 / 1.3** — NIST establishes that constraints on AI systems must exist and be justified. The Constraints with Rationale document is the implementation mechanism NIST calls for but does not specify. The framework operationalizes how that justification is encoded and delivered to the agent at the point of decision.
 
@@ -206,23 +220,23 @@ The positioning is precise. NIST defines what organizations must govern. This pa
 
 **GOVERN 3.2** — NIST defines the policy requirement for human-AI configuration. The three-response model (improvise, escalate, retreat) implements that policy at the agent decision layer, specifying the mechanism rather than only the requirement.
 
-### MAP Function Intersections
+### 6.2 MAP Function Intersections
 
 **MAP 1.1 / 1.3** — NIST addresses context awareness as a stakeholder and organizational concern. The harness makes deployment context operationally available to the agent during execution, not only to human reviewers during design.
 
 **MAP 5.1** — NIST requires impact scoping. The Threat Model with blast-radius tables executes this sub-function, providing a structured artifact that the agent can reason from rather than a compliance document that exists only in organizational records.
 
-### MANAGE Function Intersections
+### 6.3 MANAGE Function Intersections
 
 **MANAGE 2.4** — NIST defines the organizational need for mechanisms to supersede or deactivate AI system behavior. The escalation and retreat protocol implements this mechanism at the agent decision layer, providing a path to safe state before human intervention is required rather than only after it becomes possible.
 
-### NIST AI 600-1 (Generative AI Profile) Intersections
+### 6.4 NIST AI 600-1 (Generative AI Profile) Intersections
 
 - **GV-3.2-005** — Threat modeling for generative AI systems: addressed by the Threat Model with blast-radius tables.
 - **MG-2.4-002** — Escalation procedures for generative AI: addressed by the three-response model.
 - **MS-2.5-006** — Guardrail review in novel circumstances: addressed by the novel-situation decision framework embedded in the operator context and decision filters.
 
-### Where the Framework Goes Further Than NIST
+### 6.5 Where the Framework Goes Further Than NIST
 
 Neither NIST document specifies the following mechanisms. These represent the framework's primary contributions to the standards landscape:
 
@@ -232,7 +246,7 @@ Neither NIST document specifies the following mechanisms. These represent the fr
 
 **Permission to fail as a counterweight to LLM optimization bias.** Neither NIST document specifies this mechanism at the governance layer. The underlying observation — that models should sometimes produce no result — has analogues in RLHF research (calibrated abstention, refusal training). The contribution here is distinct: applying it explicitly in operating context so that success criteria are defined by governance policy rather than inferred from training. This is where the framework extends beyond both NIST's scope and prior governance frameworks' vocabulary.
 
-### Acknowledged Gaps
+### 6.6 Acknowledged Gaps
 
 The framework does not address the following areas, identified honestly for completeness and future work: bias and fairness in outputs; privacy and PII handling beyond incidental treatment; formal validation metrics and statistical performance evidence; supply chain and third-party model risks; and lifecycle management and decommissioning procedures. These are legitimate governance requirements that fall outside the framework's current scope. They are not architectural omissions; they are bounded areas for future development.
 
